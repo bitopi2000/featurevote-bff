@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: FeatureVote Spring Boot API
+
+Resources:
+  FeatureVoteApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: <your-ecr-image-uri>
+      MemorySize: 1024
+      Timeout: 30
+      Environment:
+        Variables:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://<RDS-ENDPOINT>:5432/featurevote
+          SPRING_DATASOURCE_USERNAME: postgres
+          SPRING_DATASOURCE_PASSWORD: postgres
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
