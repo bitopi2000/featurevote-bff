@@ -3,6 +3,8 @@ package com.featurevote.bff.resource;
 import com.featurevote.bff.domain.Board;
 import com.featurevote.bff.domain.User;
 import com.featurevote.bff.service.BoardService;
+import com.featurevote.bff.service.FeedbackService;
+import com.featurevote.bff.service.VoteService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,10 +25,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class BoardControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-    @MockitoBean
-    private BoardService boardService;
+    @Autowired private MockMvc mockMvc;
+    @MockitoBean private BoardService boardService;
+    @MockitoBean private FeedbackService feedbackService;
+    @MockitoBean private VoteService voteService;
 
     @Test
     void shouldReturnListOfBoards() throws Exception {
