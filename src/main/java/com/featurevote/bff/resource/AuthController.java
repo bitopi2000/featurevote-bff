@@ -32,9 +32,9 @@ public class AuthController {
                 || loginRequest.getPassword().isEmpty() || loginRequest.getPassword().isBlank() || loginRequest.getPassword() == null) {
             return ResponseEntity.badRequest().body(authService.badRequest(loginRequest));
         }
+        LoginResponse loginResponse = authService.login(loginRequest);
 
-        return ResponseEntity.ok(
-            authService.login(loginRequest));
+        return ResponseEntity.ok(loginResponse);
     }
 
     @PostMapping("/logout")
