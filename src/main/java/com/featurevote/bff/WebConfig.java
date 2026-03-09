@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // Configure CORS mappings here
         registry.addMapping("/**") // Apply CORS to all paths
-                .allowedOrigins("http://localhost:5173", "https://your-frontend-domain.com") // Specify allowed origins
+                .allowedOrigins("http://localhost:5173", "https://featurevote-frontend.vercel.app") // Specify allowed origins
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Specify allowed HTTP methods
                 .allowedHeaders("*") // Allow all headers
                 .allowCredentials(true) // Allow sending of cookies and authentication headers
