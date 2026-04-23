@@ -1,4 +1,4 @@
-package com.featurevote.bff.resource;
+package com.featurevote.bff.controller;
 
 import com.featurevote.bff.domain.Board;
 import com.featurevote.bff.domain.User;

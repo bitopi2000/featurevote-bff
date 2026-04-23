@@ -1,9 +1,9 @@
-package com.featurevote.bff.resource;
+package com.featurevote.bff.controller;
 
 import com.featurevote.bff.domain.Board;
 import com.featurevote.bff.domain.Feedback;
-import com.featurevote.bff.resource.dto.FeedbackDto;
-import com.featurevote.bff.resource.dto.SingleBoardDto;
+import com.featurevote.bff.controller.dto.FeedbackDto;
+import com.featurevote.bff.controller.dto.SingleBoardDto;
 import com.featurevote.bff.service.BoardService;
 import com.featurevote.bff.service.FeedbackService;
 import com.featurevote.bff.service.VoteService;

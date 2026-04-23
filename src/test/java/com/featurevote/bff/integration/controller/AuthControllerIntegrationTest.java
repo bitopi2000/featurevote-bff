@@ -1,10 +1,10 @@
-package com.featurevote.bff.integration.resource;
+package com.featurevote.bff.integration.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.featurevote.bff.AbstractIntegrationTest;
 import com.featurevote.bff.domain.User;
 import com.featurevote.bff.repository.UserRepository;
-import com.featurevote.bff.resource.dto.LoginRequest;
+import com.featurevote.bff.controller.dto.LoginRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

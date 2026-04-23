@@ -1,4 +1,4 @@
-package com.featurevote.bff.resource.dto;
+package com.featurevote.bff.controller.dto;
 
 import lombok.Getter;
 import lombok.Setter;

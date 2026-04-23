@@ -2,8 +2,8 @@ package com.featurevote.bff.service;
 
 import com.featurevote.bff.domain.User;
 import com.featurevote.bff.repository.UserRepository;
-import com.featurevote.bff.resource.dto.LoginRequest;
-import com.featurevote.bff.resource.dto.LoginResponse;
+import com.featurevote.bff.controller.dto.LoginRequest;
+import com.featurevote.bff.controller.dto.LoginResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

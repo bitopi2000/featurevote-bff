@@ -2,8 +2,8 @@ package com.featurevote.bff.service;
 
 import com.featurevote.bff.domain.User;
 import com.featurevote.bff.repository.UserRepository;
-import com.featurevote.bff.resource.dto.LoginRequest;
-import com.featurevote.bff.resource.dto.LoginResponse;
+import com.featurevote.bff.controller.dto.LoginRequest;
+import com.featurevote.bff.controller.dto.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

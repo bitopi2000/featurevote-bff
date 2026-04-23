@@ -1,7 +1,7 @@
-package com.featurevote.bff.resource;
+package com.featurevote.bff.controller;
 
-import com.featurevote.bff.resource.dto.LoginRequest;
-import com.featurevote.bff.resource.dto.LoginResponse;
+import com.featurevote.bff.controller.dto.LoginRequest;
+import com.featurevote.bff.controller.dto.LoginResponse;
 import com.featurevote.bff.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
