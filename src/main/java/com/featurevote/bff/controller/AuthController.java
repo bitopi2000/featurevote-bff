@@ -22,9 +22,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-    // This class can be used to handle authentication-related endpoints
-    // For example, you can add methods to handle login, logout, and user registration
-
     @PostMapping("/login")
     @Operation(summary = "User Login", description = "Endpoint for user login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {

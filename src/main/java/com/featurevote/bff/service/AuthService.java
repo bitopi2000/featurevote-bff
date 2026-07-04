@@ -4,6 +4,7 @@ import com.featurevote.bff.domain.User;
 import com.featurevote.bff.repository.UserRepository;
 import com.featurevote.bff.controller.dto.LoginRequest;
 import com.featurevote.bff.controller.dto.LoginResponse;
+import com.featurevote.bff.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +12,15 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
     }
 
     public LoginResponse login(LoginRequest loginRequest) {
-
         User user = userRepository.findByEmail(loginRequest.getEmail());
         if (user == null || !user.getPassword().equals(loginRequest.getPassword())) {
             return new LoginResponse(
@@ -26,9 +28,11 @@ public class AuthService {
                     null);
         }
 
+        String token = jwtUtil.generateToken(loginRequest.getEmail());
+
         return new LoginResponse(
                 "Login successful for user:" + loginRequest.getEmail(),
-                "dummy-token");
+                token);
     }
 
     public LoginResponse badRequest(LoginRequest loginRequest) {
