@@ -1,6 +1,7 @@
 package com.featurevote.bff.controller;
 
 import com.featurevote.bff.controller.dto.LoginRequest;
+import com.featurevote.bff.controller.dto.StatusUpdateRequest;
 import com.featurevote.bff.domain.Board;
 import com.featurevote.bff.domain.Feedback;
 import com.featurevote.bff.controller.dto.FeedbackDto;
@@ -87,5 +88,12 @@ public class BoardController {
                                               @RequestBody LoginRequest loginRequest) {
         feedbackService.saveNewVote(feedbackId, loginRequest.getEmail());
         return ResponseEntity.ok(true);
+    }
+
+    @PatchMapping("/feedback/{feedbackId}/status")
+    @Operation(summary = "Update status of a feedback", description = "Endpoint to update status of a feedback")
+    public ResponseEntity<String> updateFeedbackStatus(@PathVariable UUID feedbackId, @RequestBody StatusUpdateRequest request) {
+        feedbackService.updateStatusFeedback(feedbackId, request.getStatus());
+        return ResponseEntity.ok("Status has been updated successfully");
     }
 }

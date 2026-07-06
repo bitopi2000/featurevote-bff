@@ -66,4 +66,15 @@ public class FeedbackService {
         vote.setCreatedAt(LocalDateTime.now());
         voteRepository.saveAndFlush(vote);
     }
+
+    @Transactional
+    public void updateStatusFeedback(UUID feedbackId, String status) {
+        Feedback feedback = feedbackRepository.findById(feedbackId);
+        try {
+            feedback.setStatus(Feedback.Status.valueOf(status.toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid status value: " + status);
+        }
+        feedbackRepository.save(feedback);
+    }
 }
