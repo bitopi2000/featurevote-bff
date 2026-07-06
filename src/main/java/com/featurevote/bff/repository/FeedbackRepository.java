@@ -12,4 +12,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 
     // @Query("select fb from feedback fb join fb.board bd where bd.id = ':boardId'")
     List<Feedback> findByBoardId(UUID boardId);
+
+    Feedback findById(UUID id);
 }

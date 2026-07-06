@@ -1,5 +1,6 @@
 package com.featurevote.bff.controller;
 
+import com.featurevote.bff.controller.dto.LoginRequest;
 import com.featurevote.bff.domain.Board;
 import com.featurevote.bff.domain.Feedback;
 import com.featurevote.bff.controller.dto.FeedbackDto;
@@ -59,7 +60,8 @@ public class BoardController {
                     feedback.getDescription(),
                     feedback.getStatus().name(),
                     feedback.getOwner().getEmail(),
-                    voteCount
+                    voteCount,
+                    feedback.getId()
             );
             feedbackDtos.add(feedbackDto);
         }
@@ -70,5 +72,20 @@ public class BoardController {
         );
 
         return ResponseEntity.ok(singleBoardDto);
+    }
+
+    @PostMapping("/{boardId}/feedback")
+    @Operation(summary = "Add new feedback", description = "Endpoint to store new feedback to a board")
+    public ResponseEntity<Boolean> addNewFeedback(@PathVariable UUID boardId, @RequestBody FeedbackDto feedbackDto) {
+        feedbackService.saveNewFeedback(boardId, feedbackDto);
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/feedback/{feedbackId}/vote")
+    @Operation(summary = "Add new vote", description = "Endpoint to add new vote to a feedback")
+    public ResponseEntity<Boolean> addNewVote(@PathVariable UUID feedbackId,
+                                              @RequestBody LoginRequest loginRequest) {
+        feedbackService.saveNewVote(feedbackId, loginRequest.getEmail());
+        return ResponseEntity.ok(true);
     }
 }

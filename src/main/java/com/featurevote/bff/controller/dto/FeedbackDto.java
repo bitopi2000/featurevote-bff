@@ -2,6 +2,8 @@ package com.featurevote.bff.controller.dto;
 
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class FeedbackDto {
     private String title;
@@ -9,6 +11,7 @@ public class FeedbackDto {
     private String status;
     private String ownerName;
     private int voteCount;
+    private UUID feedbackId;
 
     public FeedbackDto() {
 
@@ -18,12 +21,14 @@ public class FeedbackDto {
                     String description,
                     String status,
                     String ownerName,
-                    int voteCount) {
+                    int voteCount,
+                    UUID feedbackId) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.ownerName = ownerName;
         this.voteCount = voteCount;
+        this.feedbackId = feedbackId;
 
     }
 
@@ -66,5 +71,12 @@ public class FeedbackDto {
 
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
+    }
+
+    public UUID getFeedbackId() {
+        return feedbackId;
+    }
+    public void setFeedbackId(UUID feedbackId) {
+        this.feedbackId = feedbackId;
     }
 }
