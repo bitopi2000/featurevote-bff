@@ -14,4 +14,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     List<Feedback> findByBoardId(UUID boardId);
 
     Feedback findById(UUID id);
+
+    void deleteById(UUID id);
 }

@@ -16,8 +16,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class FeedbackServiceTest {
 
@@ -89,10 +88,36 @@ class FeedbackServiceTest {
         when(boardRepository.findById(any(UUID.class))).thenReturn(board);
 
         feedbackService.saveNewFeedback(board.getId(), feedbackDto);
+        verify(feedbackRepository, times(1)).saveAndFlush(any());
     }
 
     @Test
     void saveNewVote() {
         feedbackService.saveNewVote(UUID.randomUUID(), "test@example.com");
+
+        verify(feedbackRepository, times(1)).findById(any(UUID.class));
+        verify(voteRepository, times(1)).saveAndFlush(any());
+    }
+
+    @Test
+    void updateFeedback() {
+        FeedbackDto feedbackDto = new FeedbackDto();
+        feedbackDto.setTitle(" update title");
+        feedbackDto.setDescription(" update description");
+        feedbackDto.setOwnerName("update@example.com");
+
+        when(userRepository.findByEmail(feedbackDto.getOwnerName())).thenReturn(mock(User.class));
+        when(feedbackRepository.findById(any(UUID.class))).thenReturn(mock(Feedback.class));
+
+        feedbackService.updateFeedback(UUID.randomUUID(), feedbackDto);
+
+        verify(feedbackRepository, times(1)).save(any(Feedback.class));
+    }
+
+    @Test
+    void deleteFeedback() {
+        feedbackService.deleteFeedback(UUID.randomUUID());
+        verify(feedbackRepository, times(1)).deleteById(any(UUID.class));
+        verify(voteRepository, times(1)).deleteByFeedbackId(any(UUID.class));
     }
 }

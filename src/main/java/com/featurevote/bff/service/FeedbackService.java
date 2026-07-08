@@ -77,4 +77,21 @@ public class FeedbackService {
         }
         feedbackRepository.save(feedback);
     }
+
+    @Transactional
+    public void updateFeedback(UUID editingFeedbackId, FeedbackDto feedbackDto) {
+        User user = userRepository.findByEmail(feedbackDto.getOwnerName());
+        Feedback feedback = feedbackRepository.findById(editingFeedbackId);
+        feedback.setTitle(feedbackDto.getTitle());
+        feedback.setDescription(feedbackDto.getDescription());
+        feedback.setOwner(user);
+        feedback.setUpdatedAt(LocalDateTime.now());
+        feedbackRepository.save(feedback);
+    }
+
+    @Transactional
+    public void deleteFeedback(UUID feedbackId) {
+        voteRepository.deleteByFeedbackId(feedbackId);
+        feedbackRepository.deleteById(feedbackId);
+    }
 }

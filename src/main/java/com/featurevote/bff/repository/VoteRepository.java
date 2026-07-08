@@ -12,4 +12,6 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
     // @Query("select vo from vote vo join vo.feedback fb where fb.id = ':feedbackId'")
     List<Vote> findByFeedbackId(UUID feedbackId);
+
+    void deleteByFeedbackId(UUID feedbackId);
 }

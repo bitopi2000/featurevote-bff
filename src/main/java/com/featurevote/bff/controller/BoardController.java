@@ -38,7 +38,7 @@ public class BoardController {
         this.voteService = voteService;
     }
 
-    @GetMapping("/list")
+    @GetMapping ("/list")
     @Operation(summary = "List all boards", description = "Endpoint to retrieve all boards")
     public ResponseEntity<List<Board>> listFeatures() {
         List<Board> boards = boardService.getAllBoards();
@@ -48,7 +48,7 @@ public class BoardController {
         return ResponseEntity.ok(boards);
     }
 
-    @GetMapping("/{boardId}")
+    @GetMapping ("/{boardId}")
     @Operation(summary = "View a single board", description = "Endpoint to retrieve a single board by its ID")
     public ResponseEntity<SingleBoardDto> singleBoardView(@PathVariable UUID boardId) {
         List<Feedback> feedbacks = feedbackService.getFeedbacksForBoardId(boardId);
@@ -75,14 +75,14 @@ public class BoardController {
         return ResponseEntity.ok(singleBoardDto);
     }
 
-    @PostMapping("/{boardId}/feedback")
+    @PostMapping ("/{boardId}/feedback")
     @Operation(summary = "Add new feedback", description = "Endpoint to store new feedback to a board")
     public ResponseEntity<Boolean> addNewFeedback(@PathVariable UUID boardId, @RequestBody FeedbackDto feedbackDto) {
         feedbackService.saveNewFeedback(boardId, feedbackDto);
         return ResponseEntity.ok(true);
     }
 
-    @PostMapping("/feedback/{feedbackId}/vote")
+    @PostMapping ("/feedback/{feedbackId}/vote")
     @Operation(summary = "Add new vote", description = "Endpoint to add new vote to a feedback")
     public ResponseEntity<Boolean> addNewVote(@PathVariable UUID feedbackId,
                                               @RequestBody LoginRequest loginRequest) {
@@ -90,10 +90,24 @@ public class BoardController {
         return ResponseEntity.ok(true);
     }
 
-    @PatchMapping("/feedback/{feedbackId}/status")
+    @PatchMapping ("/feedback/{feedbackId}/status")
     @Operation(summary = "Update status of a feedback", description = "Endpoint to update status of a feedback")
     public ResponseEntity<String> updateFeedbackStatus(@PathVariable UUID feedbackId, @RequestBody StatusUpdateRequest request) {
         feedbackService.updateStatusFeedback(feedbackId, request.getStatus());
         return ResponseEntity.ok("Status has been updated successfully");
+    }
+
+    @PatchMapping ("/feedback/{editingFeedbackId}")
+    @Operation (summary = "Update feedback", description = "Endpoint to update a feedback")
+    public ResponseEntity<Boolean> updateFeedback(@PathVariable UUID editingFeedbackId, @RequestBody FeedbackDto feedbackDto) {
+        feedbackService.updateFeedback(editingFeedbackId, feedbackDto);
+        return ResponseEntity.ok(true);
+    }
+
+    @DeleteMapping ("/feedback/{feedbackId}")
+    @Operation (summary = "Delete feedback", description = "Endpoint to delete a feedback")
+    public ResponseEntity<Boolean> deleteFeedback(@PathVariable UUID feedbackId) {
+        feedbackService.deleteFeedback(feedbackId);
+        return ResponseEntity.ok(true);
     }
 }
