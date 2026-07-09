@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
         // Configure CORS mappings here
         registry.addMapping("/**") // Apply CORS to all paths
                 .allowedOrigins("http://localhost:5173", "https://featurevote-frontend.vercel.app") // Specify allowed origins
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Specify allowed HTTP methods
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS") // Specify allowed HTTP methods
                 .allowedHeaders("*") // Allow all headers
                 .allowCredentials(true) // Allow sending of cookies and authentication headers
                 .maxAge(3600); // Cache preflight requests for 1 hour
